@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRES · Finance Training Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F5F2ED;
+  --surface:#FFFFFF;
+  --surface2:#EDE9E3;
+  --border:#D4CFC8;
+  --text:#1A1714;
+  --muted:#6B6560;
+  --dim:#A09B95;
+  --accent:#2D6A4F;
+  --accent-dark:#1B4332;
+  --accent-light:#D8F3DC;
+  --accent-text:#081C15;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Spectral',Georgia,serif;
+  --sans:'IBM Plex Sans',sans-serif;
+}
+html.dark{
+  --bg:#0F1117;
+  --surface:#1A1D27;
+  --surface2:#141720;
+  --border:#2A2D3A;
+  --text:#E8E4DC;
+  --muted:#8A8890;
+  --dim:#4A4D5A;
+  --accent:#52B788;
+  --accent-dark:#2D6A4F;
+  --accent-light:#1B3A2A;
+  --accent-text:#D8F3DC;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;transition:background .25s,color .25s}
+
+/* INTRO */
+.intro{padding:3rem 2.5rem 2.5rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.intro::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%, var(--accent-light) 0%, transparent 65%);opacity:.5;pointer-events:none}
+.intro-inner{position:relative;max-width:780px}
+.intro h2{font-family:var(--serif);font-size:1.85rem;font-weight:400;line-height:1.25;color:var(--text);margin-bottom:1rem;letter-spacing:-0.01em}
+.intro h2 em{font-style:italic;color:var(--accent)}
+.intro p{font-size:14px;line-height:1.75;color:var(--muted);margin-bottom:0.6rem;max-width:700px}
+.intro-meta{margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.meta-author{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.st{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* HEADER */
+.header{padding:2rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);margin-bottom:0.5rem}
+h1{font-size:1.75rem;font-weight:500;letter-spacing:-0.02em;line-height:1.1;color:var(--text)}
+h1 em{font-style:normal;color:var(--muted);font-weight:400}
+.hright{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.big{font-family:var(--mono);font-size:2rem;font-weight:500;color:var(--accent);line-height:1}
+.big-sub{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim)}
+.theme-btn{font-family:var(--mono);font-size:10px;background:none;border:1px solid var(--border);color:var(--muted);padding:5px 12px;border-radius:4px;cursor:pointer;transition:border-color .15s,color .15s}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* STEPS */
+.steps{display:flex;border-bottom:1px solid var(--border);overflow-x:auto}
+.step{flex:1;min-width:160px;padding:1rem 1.25rem;border-right:1px solid var(--border);display:flex;gap:10px;align-items:flex-start}
+.step:last-child{border-right:none}
+.sn{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--accent-text);background:var(--accent);border-radius:3px;padding:2px 6px;flex-shrink:0;margin-top:1px}
+html.dark .sn{color:var(--accent-text)}
+.st{font-size:12px;color:var(--muted);line-height:1.5}
+.st strong{color:var(--text);font-weight:500}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);margin:2rem 2.5rem;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.card{background:var(--surface);padding:1.25rem;display:flex;flex-direction:column;gap:7px;transition:background .15s}
+.card:hover{background:var(--surface2)}
+.card-num{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.card-title{font-size:13px;font-weight:500;line-height:1.3;flex:1;color:var(--text)}
+.card-source{font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.4}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.size{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.copy-btn{font-family:var(--mono);font-size:11px;font-weight:500;padding:6px 14px;background:var(--accent);color:var(--accent-text);border:none;border-radius:4px;cursor:pointer;transition:opacity .15s}
+html.dark .copy-btn{color:var(--accent-text)}
+.copy-btn:hover{opacity:.85}
+.copy-btn.loading{background:var(--dim);cursor:wait;color:var(--text)}
+.copy-btn.done{background:var(--accent-dark);color:var(--accent-light)}
+.copy-btn.err{background:#7F1D1D;color:#FEE2E2}
+.status{font-family:var(--mono);font-size:10px;color:var(--accent);min-height:14px;line-height:1.4}
+
+/* FOOTER */
+footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;color:var(--dim);flex-wrap:wrap;gap:8px}
+
+@media(max-width:600px){
+  .intro,.header,footer{padding-left:1.25rem;padding-right:1.25rem}
+  .intro{padding-top:2rem}
+  .intro h2{font-size:1.4rem}
+  .header{flex-direction:column;align-items:flex-start}
+  .hright{align-items:flex-start;text-align:left}
+  .grid{margin:1rem 1.25rem}
+  .steps{flex-direction:column}
+  .step{border-right:none;border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <div class="intro-inner">
+    <h2>What would Kenya's Cabinet decide<br>if <em>only the evidence</em> mattered?</h2>
+    <p>I'm building a multi-agent LLM system that simulates Kenya's Cabinet as seven AI agents — each representing a Cabinet Secretary — debating real policy questions using only verified government documents. Personal interests and political considerations are removed by design, leaving only the data.</p>
+    <p>To make each agent credible, I'm fine-tuning a base model on Kenya-specific policy data: Budget Statements, Finance Acts, Economic Surveys, and more. To generate that training data, I need people to paste a prompt into Claude, download the resulting file, and send it back. Each prompt takes about two minutes and produces 15 high-quality training examples grounded in a real Kenyan government document.</p>
+    <div class="intro-meta">
+      <span class="meta-author">Darwin Osteen · JKUAT, Nairobi · BBIT Year 1</span>
+    </div>
+  </div>
+</div>
+
+<div class="header">
+  <div>
+    <div class="eyebrow">PRES · Policy Reasoning &amp; Expert Simulation</div>
+    <h1>Finance Agent <em>Training Data</em></h1>
+  </div>
+  <div class="hright">
+    <div class="big">375</div>
+    <div class="big-sub">Target training pairs</div>
+    <button class="theme-btn" id="themeBtn">Dark mode</button>
+  </div>
+</div>
+
+<div class="steps">
+  <div class="step"><span class="sn">01</span><span class="st">Click <strong>Copy prompt</strong> on any document card</span></div>
+  <div class="step"><span class="sn">02</span><span class="st">Open <strong>claude.ai</strong> and paste the full text</span></div>
+  <div class="step"><span class="sn">03</span><span class="st">Claude generates 15 examples and a <strong>.jsonl</strong> file</span></div>
+  <div class="step"><span class="sn">04</span><span class="st">Download the <strong>.jsonl</strong> and send it back on WhatsApp</span></div>
+</div>
+
+<div class="grid">
+      <div class="card">
+        <div class="card-num">#01</div>
+        <div class="card-title">2021 Medium Term Debt Management Strategy</div>
+        <div class="card-source">2021-Medium-Term-Debt-Manadement-Strategy.pdf</div>
+        <div class="card-footer">
+          <span class="size">98.6 KB</span>
+          <button class="copy-btn" data-slug="2021_medium_term_debt_manadement_strateg" data-idx="0">Copy prompt</button>
+        </div>
+        <div class="status" id="s0"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#02</div>
+        <div class="card-title">2022 Post Election Economic And Fiscal Report</div>
+        <div class="card-source">2022-POST-ELECTION-ECONOMIC-AND-FISCAL-REPORT.pdf</div>
+        <div class="card-footer">
+          <span class="size">81.4 KB</span>
+          <button class="copy-btn" data-slug="2022_post_election_economic_and_fiscal_r" data-idx="1">Copy prompt</button>
+        </div>
+        <div class="status" id="s1"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#03</div>
+        <div class="card-title">2023 Tax Expenditure Report</div>
+        <div class="card-source">2023-Tax-Expenditure-Report-Final.pdf</div>
+        <div class="card-footer">
+          <span class="size">113.1 KB</span>
+          <button class="copy-btn" data-slug="2023_tax_expenditure_report_final" data-idx="2">Copy prompt</button>
+        </div>
+        <div class="status" id="s2"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#04</div>
+        <div class="card-title">2024 Budget Review And Outlook Paper</div>
+        <div class="card-source">2024-Budget-Review-and-Outlook-Paper.pdf</div>
+        <div class="card-footer">
+          <span class="size">520.5 KB</span>
+          <button class="copy-btn" data-slug="2024_budget_review_and_outlook_paper" data-idx="3">Copy prompt</button>
+        </div>
+        <div class="status" id="s3"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#05</div>
+        <div class="card-title">2024 Economic Survey</div>
+        <div class="card-source">2024-Economic-Survey.pdf</div>
+        <div class="card-footer">
+          <span class="size">2020.7 KB</span>
+          <button class="copy-btn" data-slug="2024_economic_survey" data-idx="4">Copy prompt</button>
+        </div>
+        <div class="status" id="s4"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#06</div>
+        <div class="card-title">2024 Medium Term Debt Management Strategy</div>
+        <div class="card-source">2024-Medium-Term-Debt-Management-Strategy-14-2-2024-Final.pdf</div>
+        <div class="card-footer">
+          <span class="size">112.5 KB</span>
+          <button class="copy-btn" data-slug="2024_medium_term_debt_management_strateg" data-idx="5">Copy prompt</button>
+        </div>
+        <div class="status" id="s5"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#07</div>
+        <div class="card-title">2025 Budget Policy Statement</div>
+        <div class="card-source">2025 Budget Policy Statement.pdf</div>
+        <div class="card-footer">
+          <span class="size">1112.2 KB</span>
+          <button class="copy-btn" data-slug="2025_budget_policy_statement" data-idx="6">Copy prompt</button>
+        </div>
+        <div class="status" id="s6"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#08</div>
+        <div class="card-title">2025 Budget Review And Outlook Paper</div>
+        <div class="card-source">2025-Budget-Review-and-Outlook-Paper-1.pdf</div>
+        <div class="card-footer">
+          <span class="size">505.7 KB</span>
+          <button class="copy-btn" data-slug="2025_budget_review_and_outlook_paper_1" data-idx="7">Copy prompt</button>
+        </div>
+        <div class="status" id="s7"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#09</div>
+        <div class="card-title">2025 Economic Survey</div>
+        <div class="card-source">2025-Economic-Survey.pdf</div>
+        <div class="card-footer">
+          <span class="size">2208.1 KB</span>
+          <button class="copy-btn" data-slug="2025_economic_survey" data-idx="8">Copy prompt</button>
+        </div>
+        <div class="status" id="s8"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#10</div>
+        <div class="card-title">2026 Budget Policy Statement</div>
+        <div class="card-source">2026 Budget Policy Statement.pdf</div>
+        <div class="card-footer">
+          <span class="size">1091.3 KB</span>
+          <button class="copy-btn" data-slug="2026_budget_policy_statement" data-idx="9">Copy prompt</button>
+        </div>
+        <div class="status" id="s9"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#11</div>
+        <div class="card-title">Annual Public Debt Report 2023–2024</div>
+        <div class="card-source">Annual-Public-Debt-Report-2023-2024.pdf</div>
+        <div class="card-footer">
+          <span class="size">168.3 KB</span>
+          <button class="copy-btn" data-slug="annual_public_debt_report_2023_2024" data-idx="10">Copy prompt</button>
+        </div>
+        <div class="status" id="s10"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#12</div>
+        <div class="card-title">Annual Public Debt Report 2024–2025</div>
+        <div class="card-source">Annual-Public-Debt-Report-2024-2025.pdf</div>
+        <div class="card-footer">
+          <span class="size">199.8 KB</span>
+          <button class="copy-btn" data-slug="annual_public_debt_report_2024_2025" data-idx="11">Copy prompt</button>
+        </div>
+        <div class="status" id="s11"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#13</div>
+        <div class="card-title">Annual Revenue Performance FY 2023–2024</div>
+        <div class="card-source">ANNUAL-REVENUE-PERFORMANCE-FY-2023-2024.pdf</div>
+        <div class="card-footer">
+          <span class="size">8.2 KB</span>
+          <button class="copy-btn" data-slug="annual_revenue_performance_fy_2023_2024_" data-idx="12">Copy prompt</button>
+        </div>
+        <div class="status" id="s12"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#14</div>
+        <div class="card-title">Annual Revenue Performance FY 2024–2025</div>
+        <div class="card-source">ANNUAL-REVENUE-PERFORMANCE-FY-2024-25-KRA.pdf</div>
+        <div class="card-footer">
+          <span class="size">8.1 KB</span>
+          <button class="copy-btn" data-slug="annual_revenue_performance_fy_2024_25_kr" data-idx="13">Copy prompt</button>
+        </div>
+        <div class="status" id="s13"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#15</div>
+        <div class="card-title">CBK Annual Report 2024</div>
+        <div class="card-source">CBK_2024 Annual Report.pdf</div>
+        <div class="card-footer">
+          <span class="size">752.3 KB</span>
+          <button class="copy-btn" data-slug="cbk_2024_annual_report" data-idx="14">Copy prompt</button>
+        </div>
+        <div class="status" id="s14"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#16</div>
+        <div class="card-title">CBK Annual Report 2025</div>
+        <div class="card-source">CBK_2025 Annual Report.pdf</div>
+        <div class="card-footer">
+          <span class="size">516.3 KB</span>
+          <button class="copy-btn" data-slug="cbk_2025_annual_report" data-idx="15">Copy prompt</button>
+        </div>
+        <div class="status" id="s15"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#17</div>
+        <div class="card-title">CBK Financial Stability Report 2023</div>
+        <div class="card-source">CBK_FSR 2023_published.pdf</div>
+        <div class="card-footer">
+          <span class="size">260.9 KB</span>
+          <button class="copy-btn" data-slug="cbk_fsr_2023_published" data-idx="16">Copy prompt</button>
+        </div>
+        <div class="status" id="s16"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#18</div>
+        <div class="card-title">CBK Financial Stability Report 2024</div>
+        <div class="card-source">CBK_FSR 2024 Sept. Final 2025.pdf</div>
+        <div class="card-footer">
+          <span class="size">279.9 KB</span>
+          <button class="copy-btn" data-slug="cbk_fsr_2024_sept_final_2025" data-idx="17">Copy prompt</button>
+        </div>
+        <div class="status" id="s17"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#19</div>
+        <div class="card-title">IMF Kenya Report 2021</div>
+        <div class="card-source">IMF-2021.pdf</div>
+        <div class="card-footer">
+          <span class="size">819.2 KB</span>
+          <button class="copy-btn" data-slug="imf_2021" data-idx="18">Copy prompt</button>
+        </div>
+        <div class="status" id="s18"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#20</div>
+        <div class="card-title">IMF Kenya Report 2023</div>
+        <div class="card-source">IMF-2023.pdf</div>
+        <div class="card-footer">
+          <span class="size">868.6 KB</span>
+          <button class="copy-btn" data-slug="imf_2023" data-idx="19">Copy prompt</button>
+        </div>
+        <div class="status" id="s19"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#21</div>
+        <div class="card-title">Tax Expenditure Report 2024</div>
+        <div class="card-source">TAX-EXPENDITURE-REPORT-TER-2024.pdf</div>
+        <div class="card-footer">
+          <span class="size">101.6 KB</span>
+          <button class="copy-btn" data-slug="tax_expenditure_report_ter_2024" data-idx="20">Copy prompt</button>
+        </div>
+        <div class="status" id="s20"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#22</div>
+        <div class="card-title">The Finance Act 2023</div>
+        <div class="card-source">The-Finance-Act--2023.pdf</div>
+        <div class="card-footer">
+          <span class="size">123.1 KB</span>
+          <button class="copy-btn" data-slug="the_finance_act_2023" data-idx="21">Copy prompt</button>
+        </div>
+        <div class="status" id="s21"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#23</div>
+        <div class="card-title">The Finance Bill 2025</div>
+        <div class="card-source">The Finance Bill 2025.pdf</div>
+        <div class="card-footer">
+          <span class="size">289.2 KB</span>
+          <button class="copy-btn" data-slug="the_finance_bill_2025" data-idx="22">Copy prompt</button>
+        </div>
+        <div class="status" id="s22"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#24</div>
+        <div class="card-title">The Finance Bill 2024</div>
+        <div class="card-source">TheFinanceBill_2024.pdf</div>
+        <div class="card-footer">
+          <span class="size">296.5 KB</span>
+          <button class="copy-btn" data-slug="thefinancebill_2024" data-idx="23">Copy prompt</button>
+        </div>
+        <div class="status" id="s23"></div>
+      </div>
+      <div class="card">
+        <div class="card-num">#25</div>
+        <div class="card-title">World Bank Kenya Report 2024</div>
+        <div class="card-source">World bank-2024.pdf</div>
+        <div class="card-footer">
+          <span class="size">210.8 KB</span>
+          <button class="copy-btn" data-slug="world_bank_2024" data-idx="24">Copy prompt</button>
+        </div>
+        <div class="status" id="s24"></div>
+      </div>
+</div>
+
+<footer>
+  <span>PRES · Finance Agent · 25 source documents</span>
+  <span>Each document → 15 grounded training pairs · DeepSeek R1 fine-tuning</span>
+</footer>
+
+<script>
+const btn = document.getElementById('themeBtn');
+const html = document.documentElement;
+const saved = localStorage.getItem('theme');
+if(saved === 'dark'){ html.classList.add('dark'); btn.textContent = 'Light mode'; }
+
+btn.addEventListener('click', () => {
+  const dark = html.classList.toggle('dark');
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+  btn.textContent = dark ? 'Light mode' : 'Dark mode';
+});
+
+async function copy(copyBtn, slug, idx) {
+  const status = document.getElementById('s' + idx);
+  copyBtn.textContent = 'Loading…';
+  copyBtn.className = 'copy-btn loading';
+  copyBtn.disabled = true;
+  try {
+    const res = await fetch('containers/' + slug + '.txt');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = 'Copied ✓';
+    copyBtn.className = 'copy-btn done';
+    const kb = (text.length / 1024).toFixed(0);
+    status.textContent = kb + ' KB on clipboard';
+    setTimeout(() => {
+      const card = copyBtn.closest('.card');
+      card.innerHTML = `<a href="https://claude.ai/new" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;min-height:110px;text-decoration:none;color:var(--accent-text)"><span style="font-family:var(--mono);font-size:11px;opacity:0.75">${kb} KB ready to paste</span><span style="font-size:14px;font-weight:500;font-family:var(--sans)">Open Claude →</span></a>`;
+      card.style.background = 'var(--accent)';
+      card.style.cursor = 'pointer';
+      card.style.transition = 'background 0.3s';
+    }, 600);
+  } catch(e) {
+    copyBtn.textContent = 'Failed';
+    copyBtn.className = 'copy-btn err';
+    copyBtn.disabled = false;
+    status.textContent = e.message;
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy prompt';
+      copyBtn.className = 'copy-btn';
+      status.textContent = '';
+    }, 3000);
+  }
+}
+document.querySelectorAll('.copy-btn').forEach(b => {
+  b.addEventListener('click', () => copy(b, b.dataset.slug, b.dataset.idx));
+});
+</script>
+</body>
+</html>
