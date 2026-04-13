@@ -48,10 +48,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .intro p{font-size:14px;line-height:1.75;color:var(--muted);margin-bottom:0.6rem;max-width:700px}
 .intro-meta{margin-top:1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
 .meta-author{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.meta-divider{width:1px;height:12px;background:var(--border)}
-.claude-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-dark);border-opacity:.3;padding:4px 10px;border-radius:20px;text-decoration:none;transition:opacity .15s}
-.claude-badge:hover{opacity:.8}
-.claude-badge svg{width:12px;height:12px;fill:currentColor}
+.st{font-size:12px;color:var(--muted);line-height:1.5}
 
 /* HEADER */
 .header{padding:2rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap}
@@ -114,11 +111,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);display:flex;jus
     <p>To make each agent credible, I'm fine-tuning a base model on Kenya-specific policy data: Budget Statements, Finance Acts, Economic Surveys, and more. To generate that training data, I need people to paste a prompt into Claude, download the resulting file, and send it back. Each prompt takes about two minutes and produces 15 high-quality training examples grounded in a real Kenyan government document.</p>
     <div class="intro-meta">
       <span class="meta-author">Darwin Osteen · JKUAT, Nairobi · BBIT Year 1</span>
-      <div class="meta-divider"></div>
-      <a class="claude-badge" href="https://claude.ai" target="_blank">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-        Built with Claude
-      </a>
     </div>
   </div>
 </div>
